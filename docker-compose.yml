@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+  blue-app:
+    image: httpd:latest
+    container_name: blue-app
+    ports:
+    - '8084:80'
+    volumes:
+    - ${PWD}/blue:/usr/local/apache2/htdocs
+  green-app:
+    image: httpd:latest
+    container_name: green-app
+    ports:
+    - '8085:80'
+    volumes:
+    - ${PWD}/green:/usr/local/apache2/htdocs
+  env-mongodb:
+    image: mongo:latest
+    container_name: env-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - 27017:27017
+    volumes:
+      - ${PWD}/mongodb-data:/data/db
+  # env-api:
+  #   build: ./env-api
+  #   container_name: env-api
+  #   ports:
+  #     - '8083:3000'
+  #   depends_on:
+  #     - mongodb_container
