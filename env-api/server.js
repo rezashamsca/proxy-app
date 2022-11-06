@@ -7,7 +7,9 @@ bodyParser = require('body-parser');
   
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://root:secret@localhost:27017/environmentdb?authMechanism=DEFAULT&authSource=admin'); 
+mongoUrl = process.env.MONGO_URL || 'mongodb://root:secret@localhost:27017/environmentdb?authMechanism=DEFAULT&authSource=admin'
+console.log('MONGO_URL=' + mongoUrl)
+mongoose.connect(mongoUrl); 
 
 
 app.use(bodyParser.urlencoded({ extended: true }));

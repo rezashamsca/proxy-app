@@ -24,10 +24,13 @@ services:
       - 27017:27017
     volumes:
       - ${PWD}/mongodb-data:/data/db
-  # env-api:
-  #   build: ./env-api
-  #   container_name: env-api
-  #   ports:
-  #     - '8083:3000'
-  #   depends_on:
-  #     - mongodb_container
+  env-api:
+    build: ./env-api
+    container_name: env-api
+    ports:
+      - '8083:3000'
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://root:secret@env-mongodb:27017/environmentdb?authMechanism=DEFAULT&authSource=admin
+    depends_on:
+      - env-mongodb
