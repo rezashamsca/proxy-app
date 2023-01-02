@@ -10,3 +10,5 @@ docker compose up -d
 Check MongoDB with MongoDB Compass or Mongo Shell
 
 ## Running the proxy
+
+docker cp resty  proxy:/usr/local/openresty/lualib
